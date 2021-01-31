@@ -1,16 +1,13 @@
-var net = require('net')
+'use strict';
 
-var server = net.createServer(function(connection) {
-	console.log('Client connected');
+const express = require('express');
+const PORT = 8080;
+const HOST = '0.0.0.0';
+const app = express()
 
-	connection.on('end', function() {
-		console.log('client disconnected');
-	});
-
-	connection.write('Hello world');
-	connection.pipe(connection);
+app.get('/', (req, res) => {
+	res.send('Hello World');
 });
 
-server.listen(8080, function(){
-	console.log('server is listening')
-});
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
