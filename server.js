@@ -1,9 +1,20 @@
-var express = require('express');
-var app = express();
+const { request } = require('express');
+const express = require('express');
+const app = express();
+const operations = require('./operations/data_handler');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
  
-var core = require('./core');
-app.use('/api/', core);
+app.get('/get', function (req, res) {
+	res.send(operations.data.get_data());
+});
  
-var server = app.listen(8000, function() {
-    console.log('Listening on port http://localhost:8000/api...');
+app.post('/add', function (req, res) {
+	operations.data.add_data(req.body);
+	res.send('added');
+});
+
+app.listen(8000, function() {
+    console.log('Listening on port http://localhost:8000/...');
 });
