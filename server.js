@@ -12,7 +12,17 @@ app.get('/get', function (req, res) {
  
 app.post('/add', function (req, res) {
 	operations.data.add_data(req.body);
-	res.send('added');
+	res.send('Added');
+});
+
+app.put('/update', function(req, res) {
+	operations.data.update_data(req.body);
+	res.send('Updated');
+});
+
+app.delete('/deletebyid', function(req, res) {
+	operations.data.delete_by_id(req.body);
+	res.send('Deleted');
 });
 
 app.listen(8000, function() {
